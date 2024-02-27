@@ -3,6 +3,10 @@ import './App.css'
 import useTelegram from './hooks/useTelegram'
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ChakraProvider } from '@chakra-ui/react';
+
+const queryClient = new QueryClient()
 
 function App() {
   const tg = useTelegram()
@@ -17,7 +21,11 @@ function App() {
   
   
   return (
-   <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <RouterProvider router={router} />
+      </ChakraProvider>
+    </QueryClientProvider>
   )
 }
 
